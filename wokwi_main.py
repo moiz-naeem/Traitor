@@ -24,10 +24,10 @@ except ImportError:
 servo_scan    = PWM(Pin(3));  servo_scan.freq(50)
 servo_trigger = PWM(Pin(4));  servo_trigger.freq(50)
 
-trig = Pin(5, Pin.OUT)
-echo = Pin(6, Pin.IN)    
+trig = Pin(8, Pin.OUT)
+echo = Pin(5, Pin.IN)    
 
-buzzer = PWM(Pin(8))
+buzzer = PWM(Pin(6))
 buzzer.freq(2730)
 buzzer.duty_u16(0)
 
