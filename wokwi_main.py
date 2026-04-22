@@ -30,9 +30,8 @@ echo = Pin(5, Pin.IN)
 buzzer = PWM(Pin(6))
 buzzer.freq(2730)
 buzzer.duty_u16(0)
-
 mode_sw = Pin(9, Pin.IN, Pin.PULL_DOWN)
-
+btn_power = Pin(12, Pin.IN)
 led_red   = Pin(10, Pin.OUT)
 led_green = Pin(11, Pin.OUT)
 led_power = Pin(13, Pin.OUT)
@@ -42,7 +41,6 @@ try:
 except Exception as e:
     i2c = None
     print(f"[WARN] I2C init failed: {e}")
-
 pot = ADC(26)
 
 
@@ -154,6 +152,23 @@ def full_home():
     servo_set_us(servo_scan,    angle_to_us(90))
     servo_set_us(servo_trigger, angle_to_us(90))
 
+system_active = False
+_btn_prev     = 0
+_btn_last_ms  = 0
+def check_button():
+    global system_active, _btn_prev, _btn_last_ms
+    
+    curr_val = btn_power.value()
+    curr_ms = time.ticks_ms()
+    
+    if curr_val == 1 and _btn_prev == 0:
+        if time.ticks_diff(curr_ms, _btn_last_ms) > 250:
+            system_active = not system_active
+
+            beep(1, 50, 0) 
+            print(f"[POWER] System is now {'ON' if system_active else 'OFF'}")
+            
+    _btn_prev = curr_val
 
 
 STATE_IDLE     = 0
@@ -188,6 +203,20 @@ print("=" * 42)
 
 
 while True:
+    check_button()
+
+    if not system_active:
+
+        led_power.value(0)
+        led_red.value(0)
+        led_green.value(0)
+        buzzer_off()
+        oled_show("SYSTEM OFF", "Press button")
+        state = STATE_IDLE 
+        time.sleep_ms(100)
+        continue 
+
+    led_power.value(1) 
 
     if state == STATE_IDLE:
         led_green.value(1)

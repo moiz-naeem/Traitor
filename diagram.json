@@ -24,7 +24,7 @@
       "id": "ultrasonic1",
       "top": 231.9,
       "left": 197.5,
-      "attrs": { "distance": "206" }
+      "attrs": { "distance": "346" }
     },
     {
       "type": "wokwi-resistor",
@@ -100,6 +100,14 @@
       "left": -58.15,
       "rotate": 90,
       "attrs": { "value": "2000" }
+    },
+    { "type": "wokwi-pushbutton", "id": "btn1", "top": 455, "left": 310, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r7",
+      "top": 416.75,
+      "left": 298,
+      "attrs": { "value": "10000" }
     }
   ],
   "connections": [
@@ -110,7 +118,7 @@
     [ "ultrasonic1:VCC", "bb1:tp.25", "red", [ "v-144", "h-76.8" ] ],
     [ "ultrasonic1:GND", "bb1:tn.25", "black", [ "v28.8", "h-135.6" ] ],
     [ "ultrasonic1:TRIG", "bb1:7b.i", "orange", [ "v-297.6", "h-307.6" ] ],
-    [ "r1:1", "bb1:9b.i", "yellow", [ "v-86.4", "h-19.2" ] ],
+    [ "r1:1", "bb1:9b.i", "cyan", [ "v-86.4", "h-19.2" ] ],
     [ "r1:2", "ultrasonic1:ECHO", "yellow", [ "v172.8", "h219.6" ] ],
     [ "r6:1", "bb1:9b.j", "violet", [ "h0" ] ],
     [ "r6:2", "bb1:bn.5", "blue", [ "h0" ] ],
@@ -142,6 +150,10 @@
     [ "sw1:2", "bb1:12b.j", "blue", [ "v38.4", "h-182.3", "v-364.8", "h28.8" ] ],
     [ "r5:1", "bb1:12b.j", "yellow", [ "v-9.6", "h-115.2" ] ],
     [ "r5:2", "bb1:bn.22", "yellow", [ "v-48", "h-30" ] ],
+    [ "bb1:bp.24", "btn1:1.l", "red", [ "v19.2", "h57.6" ] ],
+    [ "btn1:2.l", "bb1:16b.j", "white", [ "v38.4", "h-192" ] ],
+    [ "r7:1", "bb1:16b.j", "white", [ "v-9.6", "h-144" ] ],
+    [ "r7:2", "bb1:bn.24", "black", [ "v-48", "h-19.2" ] ],
     [ "pico:GP0", "bb1:1b.h", "", [ "$bb" ] ],
     [ "pico:GP1", "bb1:2b.h", "", [ "$bb" ] ],
     [ "pico:GND.1", "bb1:3b.h", "", [ "$bb" ] ],
