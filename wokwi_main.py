@@ -45,11 +45,17 @@ except ImportError:
 servo_scan    = PWM(Pin(3));  servo_scan.freq(50)
 servo_trigger = PWM(Pin(4));  servo_trigger.freq(50)
 
+<<<<<<< HEAD
 # Trigger and echo of ultrasonic sensor 
 trig = Pin(5, Pin.OUT)
 echo = Pin(8, Pin.IN)    
 
 # The buzzer needs a crazy high frequency to sound really annoying
+=======
+trig = Pin(5, Pin.OUT)
+echo = Pin(8, Pin.IN)    
+
+>>>>>>> 2d3d338568b464af29cd44d32bc73080b6aa48dd
 buzzer = PWM(Pin(1))
 buzzer.freq(2730)
 buzzer.duty_u16(0) 
