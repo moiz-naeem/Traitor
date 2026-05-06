@@ -24,20 +24,20 @@ except ImportError:
 servo_scan    = PWM(Pin(3));  servo_scan.freq(50)
 servo_trigger = PWM(Pin(4));  servo_trigger.freq(50)
 
-trig = Pin(8, Pin.OUT)
-echo = Pin(5, Pin.IN)    
+trig = Pin(5, Pin.OUT)
+echo = Pin(8, Pin.IN)    
 
-buzzer = PWM(Pin(6))
+buzzer = PWM(Pin(1))
 buzzer.freq(2730)
 buzzer.duty_u16(0)
 mode_sw = Pin(9, Pin.IN, Pin.PULL_DOWN)
 btn_power = Pin(12, Pin.IN)
-led_red   = Pin(10, Pin.OUT)
-led_green = Pin(11, Pin.OUT)
-led_power = Pin(13, Pin.OUT)
+led_red   = Pin(11, Pin.OUT)
+led_green = Pin(13, Pin.OUT)
+led_power = Pin(10, Pin.OUT)
 
 try:
-    i2c = I2C(0, sda=Pin(17), scl=Pin(16), freq=400000)
+    i2c = I2C(0, sda=Pin(16), scl=Pin(17), freq=400000)
 except Exception as e:
     i2c = None
     print(f"[WARN] I2C init failed: {e}")
